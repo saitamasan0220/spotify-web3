@@ -48,8 +48,6 @@ const Payment = () => {
     })
   }
 
-  console.log('isPaid: ', isPaid);
-
   const payClicked = async() => {
     let [payerSigner] = await anchor.web3.PublicKey.findProgramAddress(
       [utf8.encode('payer'), wallet.publicKey.toBuffer()],

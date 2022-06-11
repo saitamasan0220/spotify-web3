@@ -2,6 +2,9 @@ import Nav from '../components/nav'
 import Activity from '../components/activity'
 import {useEffect, useState} from 'react'
 import Header from '../components/Header'
+import UploadModal from '../components/UploadModal'
+
+import useSpotify from '../hooks/useSpotify'
 
 const HomePage = () => {
   const [showUploadMusic, setShowUploadMusic] = useState(false)
@@ -9,14 +12,31 @@ const HomePage = () => {
   const [musicUrl, setMusicUrl] = useState('')
   const [songs, setSongs] = useState([])
 
+  const { newMusic, getSongs } = useSpotify(
+    musicUrl,
+    title,
+    setTitle,
+    setMusicUrl,
+    setShowUploadMusic,
+  )
 
+  console.log(showUploadMusic)
   return (
     <div className='flex'>
       <Nav />
       <div className='w-full'>
-        <Header/>
+        <Header setShowUploadMusic={setShowUploadMusic} />
         {/* <Playlist/> */}
         {/* <PlayerControls/> */}
+        {showUploadMusic && (
+          <UploadModal
+            title={title}
+            setTitle={setTitle}
+            setShowUploadMusic={setShowUploadMusic}
+            setMusicUrl={setMusicUrl}
+            newMusic={newMusic}
+          />
+        )}
       </div>
       <Activity />
     </div>

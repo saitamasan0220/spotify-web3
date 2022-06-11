@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import UploadButton from './UploadButton'
 
 const styles = {
   header: `max-w-7xl m-auto p-3`,
@@ -14,7 +15,7 @@ const styles = {
   playButton: `bg-green-500 w-16 h-16 flex pl-2 items-center justify-center rounded-full cursor-pointer`
 }
 
-const Header = () => {
+const Header = ({setShowUploadMusic}) => {
   return (
     <div className={styles.header}>
         <div className="flex items-center">
@@ -37,7 +38,7 @@ const Header = () => {
         </div>
 
         <div className={styles.headerRight}>
-          {/* <UploadButton/> */}
+          <UploadButton setShowUploadMusic={setShowUploadMusic}/>
 
           <div className={styles.profile}>
             <div className={styles.profileAvatarContainer}>

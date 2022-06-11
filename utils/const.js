@@ -4,7 +4,8 @@ import spotify from './spotify.json'
 export const SOLANA_HOST = 'https://muddy-shy-dawn.solana-devnet.quiknode.pro/5b638e723dd3df716748cb5432458a2e21e53e05/'
 
 export const STABLE_POOL_PROGRAM_ID = new PublicKey(
-    "BC7gmtZhfcnNUzWnc1SkVE3px6Qhx5nLADraMgscmGqr"
+    // "BC7gmtZhfcnNUzWnc1SkVE3px6Qhx5nLADraMgscmGqr"
+    "Fd2W9GUSBYF9n38va7aisKH8Ht4Gparh5UDDd1GPXZUe"
 )
 
 export const STABLE_POOL_IDL = spotify
