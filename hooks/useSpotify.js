@@ -41,7 +41,26 @@ const useSpotify = (
         )
 
         const tx = await program.rpc.createMusic(
-
+            title,
+            musicUrl,
+            {
+                accounts: {
+                    music: music_pda,
+                    randomkey: randomkey,
+                    authority: wallet.publicKey,
+                    ...defaultAccounts,
+                },
+            },
         )
+
+        console.log(tx)
+
+        setTitle('')
+        setMusicUrl('')
+        setShowUploadMusic(false)
     }
+
+    return {newMusic, getSongs}
 }
+
+export default useSpotify

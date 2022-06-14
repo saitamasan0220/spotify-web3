@@ -7,17 +7,16 @@ import Playlist from '../components/Playlist'
 import PlayerControls from '../components/PlayerControls'
 
 import useSpotify from '../hooks/useSpotify'
-import songs from '../data/songs'
+// import songs from '../data/songs'
 
 
 
-console.log(songs, "SONGS ARE HERE")
+// console.log(songs, "SONGS ARE HERE")
 
 const HomePage = () => {
   const [showUploadMusic, setShowUploadMusic] = useState(false)
   const [title, setTitle] = useState('')
   const [musicUrl, setMusicUrl] = useState('')
-  // const [songs, setSongs] = useState([])
 
   const { newMusic, getSongs } = useSpotify(
     musicUrl,
@@ -27,14 +26,21 @@ const HomePage = () => {
     setShowUploadMusic,
   )
 
-  console.log(showUploadMusic)
+  const [songs, setSongs] = useState([])
+
+  useEffect(() => {
+    getSongs().then(songs => {
+      setSongs(songs)
+    })
+  }, [])
+  
   return (
     <div className='flex'>
       <Nav />
       <div className='w-full'>
         <Header setShowUploadMusic={setShowUploadMusic} />
         <Playlist songs={songs}/>
-        <PlayerControls/>
+        <PlayerControls songs={songs}/>
         {showUploadMusic && (
           <UploadModal
             title={title}

@@ -1,9 +1,5 @@
 import styles from '../styles/UploadModal.module.css'
 
-const styles = {
-
-}
-
 const UploadModal = (
     title,
     musicUrl,

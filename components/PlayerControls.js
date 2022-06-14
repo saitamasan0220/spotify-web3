@@ -6,6 +6,8 @@ import repeat from '../assets/repeat.svg'
 import shuffle from '../assets/shuffle.svg'
 import playRounded from '../assets/playRounded.svg'
 import pauseIcon from '../assets/pause.svg'
+import { useContext } from 'react'
+import { SpotifyContext } from '../context/context'
 
 const styles = {
     albumCoverContainer: `w-20 h-20 mr-3`,
@@ -18,56 +20,87 @@ const styles = {
     coverPhoto: `object-cover `
 }
 
-const PlayerControls = () => (
-    <div className={styles.mainControl}>
-        <div className={styles.flexCenter}>
-            <div className={styles.albumCoverContainer}>
-                <Image
-                    src='https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/284832/settings_images/rL1CifhXRJiT0RoN2FjK_Logo_roundbackground_black.png'
-                    height={200}
-                    width={200}
-                    alt='song-cover' />
+const PlayerControls = ({songs}) => {
+
+    const {
+        currentSong,
+        isPlaying,
+        volume,
+        onChange,
+        timestamp,
+        progress,
+        playNext,
+        playPrevious,
+        isPaused,
+        play,
+        pause,
+        onProgressChange
+    } = useContext(SpotifyContext)
+
+    if (!isPlaying) return null
+
+    return (
+        <div className={styles.mainControl}>
+            <div className={styles.flexCenter}>
+                <div className={styles.albumCoverContainer}>
+                    <Image
+                        src='https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/284832/settings_images/rL1CifhXRJiT0RoN2FjK_Logo_roundbackground_black.png'
+                        height={200}
+                        width={200}
+                        alt='song-cover' />
+                </div>
+                <div>
+                    <p>{currentSong.title}</p>
+                    <p className="opacity-50">artist</p>
+                </div>
             </div>
             <div>
-                <p>Current Song</p>
-                <p className="opacity-50">artist</p>
-            </div>
-        </div>
-        <div>
-            <div className={styles.controlIconContainer}>
-                <div className={styles.controlIcon}>
-                    <Image src={shuffle} alt='shuffle' />
-                </div>
-                <div className={styles.controlIcon}>
-                    <Image src={prev} alt='prev' />
-                </div>
-                <div className={styles.controlIcon}>
-                    <Image src={next} alt='next' />
-                </div>
-                <div className={styles.controlIcon}>
-                    <Image src={repeat} alt='repeat' />
-                </div>
-            </div>
-            <div className={styles.flexCenter}>
-                <small>1:30</small>
-                <input
-                    type='range'
-                    className={styles.range} />
-                <small>2:43</small> 
-            </div>
-        </div>
+                <div className={styles.controlIconContainer}>
+                    <div className={styles.controlIcon}>
+                        <Image src={shuffle} alt='shuffle' />
+                    </div>
+                    <div onClick={e => playPrevious(songs)} className={styles.controlIcon}>
+                        <Image src={previous} alt='prev' />
+                    </div>
 
-        <div>
-            <div className={styles.flexCenter}>
-                <Image src={speaker} alt='speaker' />
-                <input
-                    type='range'
-                    id='volume-range'
-                    />
+                    {isPaused ? <div className={styles.playIcon} onClick={play}><Image src={playRounded} alt="play"/></div> : <div className={styles.pauseIconStyle} onClick={pause}>
+                        <Image src={pauseIcon} alt='pause' />
+                    </div>
+                    }
+                    
+                    <div onClick={e => playNext(songs)} className={styles.controlIcon}>
+                        <Image src={next} alt='next' />
+                    </div>
+                    <div className={styles.controlIcon}>
+                        <Image src={repeat} alt='repeat' />
+                    </div>
+                </div>
+                <div className={styles.flexCenter}>
+                    <small>{timestamp}</small>
+                    <input
+                        value={progress}
+                        type='range'
+                        onChange={e=> onProgressChange(e)}
+                        className={styles.range} />
+                </div>
             </div>
-        </div>
 
-    </div>
-)
+            <div>
+                <div className={styles.flexCenter}>
+                    <Image src={speaker} alt='speaker' />
+                    <input
+                        value={volume}
+                        onChange = {e => onVolumeChange(e)}
+                        type='range'
+                        id='volume-range'
+                        />
+                </div>
+            </div>
+
+        </div>
+    )
+}
+    
+
 
 export default PlayerControls

@@ -7,28 +7,30 @@ const styles = {
     tableHeader: `border-b border-gray-100/20 pb-5 opacity-50`
 }
 
-const Playlist = () => {
-  return (
-    <div className={styles.tableWrapper}>
-        <table className={styles.table}>
-            <tbody className={styles.tableHeader}>
-                <tr>
-                    <th className='pb-3'>#</th>
-                    <th className='pb-3'>TITLE</th>
-                    <th className='pb-3'>PLAYS</th>
-                    <th className='pb-3'>
-                        <img alt='time' src='assets/time.svg' />
-                    </th>
-                </tr>
-            </tbody>
-            <tbody className='mb-6 block'></tbody>
+const Playlist = ({songs}) => {
 
-            {songs.map(song=> {
-                return <TableRow key={song.id} song={song} />
-            })}
+    console.log('songs: ', songs)
+    return (
+        <div className={styles.tableWrapper}>
+            <table className={styles.table}>
+                <tbody className={styles.tableHeader}>
+                    <tr>
+                        <th className='pb-3'>#</th>
+                        <th className='pb-3'>TITLE</th>
+                        <th className='pb-3'>PLAYS</th>
+                        <th className='pb-3'>
+                            <img alt='time' src='assets/time.svg' />
+                        </th>
+                    </tr>
+                </tbody>
+                <tbody className='mb-6 block'></tbody>
 
-        </table>
-    </div>
+                {songs.map(song=> {
+                    return <TableRow key={song.id} song={song} />
+                })}
+
+            </table>
+        </div>
   )
 }
 

@@ -44,7 +44,9 @@ const Payment = () => {
     setPayers(payerList)
     console.log("GET ALL WALLETS IS RUNNING")
     payerList.forEach(payer => {
-      if (payer.account.wallet.toBase58() == wallet.publicKey.toBase58()) setPaid(true)
+      if (payer.account.wallet.toBase58() == wallet.publicKey.toBase58()) {
+        setPaid(true)
+      }
     })
   }
 
