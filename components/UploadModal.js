@@ -1,13 +1,13 @@
 import styles from '../styles/UploadModal.module.css'
 
-const UploadModal = (
+const UploadModal = ({
     title,
     musicUrl,
     setTitle,
     setMusicUrl,
     setShowUploadMusic,
-    newMusic,
-) => {
+    newMusic
+}) => {
   return (
     <div className={styles.inputFiled}>
         <div className={styles.inputTitle}>
@@ -18,7 +18,10 @@ const UploadModal = (
                 className={styles.input}
                 type='text'
                 value={musicUrl}
-                onChange={e=> setMusicUrl(e.target.value)}
+                onChange={(e) => {
+                    console.log('setMusicUrl: ', setMusicUrl)
+                    setMusicUrl(e.target.value);
+                }}
             />
         </div>
 

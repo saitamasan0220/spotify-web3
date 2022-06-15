@@ -26,7 +26,7 @@ const Playlist = ({songs}) => {
                 <tbody className='mb-6 block'></tbody>
 
                 {songs.map(song=> {
-                    return <TableRow key={song.id} song={song} />
+                    return <TableRow key={song.id} song={song.account} />
                 })}
 
             </table>

@@ -33,10 +33,10 @@ const useSpotify = (
     }
 
     const newMusic = async () => {
-        const randomKey = anchor.web3.Keypair.generate().publicKey;
+        const randomkey = anchor.web3.Keypair.generate().publicKey;
 
         let [music_pda] = await anchor.web3.PublicKey.findProgramAddress(
-            [utf8.encode('music'). randomKey.toBuffer()],
+            [utf8.encode('music'), randomkey.toBuffer()],
             program.programId,
         )
 

@@ -23,7 +23,7 @@ export const SpotifyProvider  = ({children}) => {
 
     const playOnSelect = (song) => {
         try {
-            document.querySelector('#audio-element').src = song.link
+            document.querySelector('#audio-element').src = song.musicUrl
             document.querySelector('#audio-element').play()
             setCurrentSong(song)
             setIsPlaying(true)
